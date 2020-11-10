@@ -14,8 +14,8 @@ mkdir -p $dumpfolder
 # delete logentries older than
 # cleandate=$(date +'%Y-%m-%d' --date='-3 months')
 # cleandate=$(date +'%Y-%m-%d' --date='-1 year')
- cleandate=$(date +'%Y-%m-%d' --date='-14 days')
-#cleandate=$(date +'%Y-%m-%d' --date='-1 day')
+cleandate=$(date +'%Y-%m-%d' --date='-14 days')
+# cleandate=$(date +'%Y-%m-%d' --date='-1 day')
 
 q1='SELECT COUNT(*) as CNT FROM logs' 
 q2='SELECT COUNT(*) CNT_TO_DELETE FROM logs WHERE date(created) <"'$cleandate'";'
@@ -51,7 +51,7 @@ mysql -e "$q1" $dbname
 q4='OPTIMIZE TABLE logs;' 
 mysql -e "$q4" $dbname
 
-if [ $? -eq 0]
+if [ $? -eq 0 ]
 then
 	echo "Success"
 	systemctl start apache2
